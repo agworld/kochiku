@@ -3,7 +3,7 @@ require 'net/http'
 require 'secrets'
 
 class GithubRequest
-  OAUTH_TOKEN = Secrets.github_oauth
+  OAUTH_TOKEN = configatron.github_oath
   AUTH = {"Authorization" => "token #{OAUTH_TOKEN}"}
 
   class ResponseError < Exception

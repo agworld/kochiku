@@ -24,6 +24,8 @@ gem 'httparty'
 gem 'bullet'
 gem 'pry-rails'
 
+gem "configatron"
+
 group :assets do
   gem 'compass-rails'
   gem 'jquery-rails'
@@ -43,6 +45,7 @@ group :development do
   gem 'rvm-capistrano', require: false
   gem 'thin'
   gem 'rails-erd'
+  gem "byebug"
 end
 
 group :test do
