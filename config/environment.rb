@@ -4,14 +4,6 @@ require File.expand_path('../application', __FILE__)
 # Load application settings for Kochiku
 require File.expand_path('../../lib/settings_accessor', __FILE__)
 
-CONF_FILE = File.expand_path('../application.yml', __FILE__)
-
-if !File.exist?(CONF_FILE)
-  raise "#{CONF_FILE} is required to start Kochiku"
-else
-  Settings = SettingsAccessor.new(File.read(CONF_FILE))
-end
-
 # Disable the default XML params parser - we aren't using it and in the past
 # it has had security holes such as CVE-2013-0156
 ActionDispatch::ParamsParser::DEFAULT_PARSERS.delete(Mime::XML)

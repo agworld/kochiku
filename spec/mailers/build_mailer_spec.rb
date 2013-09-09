@@ -5,8 +5,8 @@ describe BuildMailer do
 
   describe "#error_email" do
     before do
-      Settings.stub(:sender_email_address).and_return('kochiku@example.com')
-      Settings.stub(:kochiku_notifications_email_address).and_return('notify@example.com')
+      configatron.sender_email_address.and_return('kochiku@example.com')
+      configatron.kochiku_notifications_email_address.and_return('notify@example.com')
     end
 
     it "sends the email" do

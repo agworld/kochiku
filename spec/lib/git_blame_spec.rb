@@ -24,7 +24,7 @@ describe GitBlame do
 
     context "with a git prefix" do
       before do
-        allow(Settings).to receive(:git_pair_email_prefix).and_return("git")
+        allow(configatron).to receive(git_pair_email_prefix).and_return("git")
       end
 
       it "should be able to extract a single user" do

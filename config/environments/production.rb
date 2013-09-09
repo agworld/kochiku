@@ -65,13 +65,13 @@ Kochiku::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  Rails.application.routes.default_url_options[:host] = Settings.kochiku_host
-  Rails.application.routes.default_url_options[:protocol] = Settings.kochiku_protocol
-  config.action_mailer.default_url_options = {:host => Settings.kochiku_host, :protocol => Settings.kochiku_protocol}
+  Rails.application.routes.default_url_options[:host] = confgatron.kochiku_host
+  Rails.application.routes.default_url_options[:protocol] = configatron.kochiku_protocol
+  config.action_mailer.default_url_options = {:host => configatron.kochiku_host, :protocol => configatron.kochiku_protocol}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => Settings.smtp_server,
+    :address => confgatron.smtp_server,
     :port => 25
   }
 end
