@@ -24,7 +24,7 @@ class Repository < ActiveRecord::Base
 
   # Where to fetch from (git mirror if defined, otherwise the regular git url)
   def url_for_fetching
-    server = Settings.git_server(url)
+    server = SettingsAccessor.git_server(url)
     if server.mirror.present?
       url.gsub(%r{(git@|https://).*?(:|/)}, server.mirror)
     else
@@ -51,7 +51,7 @@ class Repository < ActiveRecord::Base
   end
 
   def self.remote_server(url)
-    server = Settings.git_server(url)
+    server = SettingsAccessor.git_server(url)
 
     raise UnknownServer, url unless server
 

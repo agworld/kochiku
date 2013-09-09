@@ -32,8 +32,8 @@ configatron.smtp_server = ENV["SMTP_SERVER"]
 # List your git servers (at least for now, they need to be either github, github enterprise, or
 # Atlassian Stash for things like constructing URLs to pages on those servers. Would be nice to
 # just turn off the fancy features for a vanilla git server instead, but that isn't yet possible).
-configatron.git_servers = {
-                            "github_com" => { "type" => "github" },
+configatron.git_servers = { 
+                            "github.com" => { "type" => "github" },
 }
 
 # If you would like Kochiku to clone and fetch repositories from a git mirror
