@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
-gem 'passenger', '4.0.10', group: :production
+gem 'passenger', '4.0.16', group: :production
 
 gem 'carrierwave'
-gem 'mysql2'
+gem 'pg'
 gem 'symbolize'
 
 gem 'haml-rails'
