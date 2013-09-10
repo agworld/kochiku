@@ -7,13 +7,7 @@ describe GithubCommitStatus do
   let(:build) { FactoryGirl.create(:build, :project => project) }
 
   before do
-    settings = SettingsAccessor.new(<<-YAML)
-    git_servers:
-      git.example.com:
-        type: github
-      github.com:
-        type: github
-    YAML
+    settings = {"git_servers" => {"git.example.com" => {"type" => "github"}, "github.com" => {"type" => "github"}}}
     stub_const "Settings", settings
   end
 

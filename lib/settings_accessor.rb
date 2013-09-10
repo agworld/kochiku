@@ -1,5 +1,6 @@
 require 'active_support/core_ext/hash/indifferent_access'
 require 'server_settings'
+require 'configatron'
 
 class SettingsAccessor
 

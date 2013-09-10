@@ -6,11 +6,7 @@ describe GithubPostReceiveHook do
   let(:repository) { FactoryGirl.create(:repository, :url => "git@git.example.com:square/web.git") }
 
   before do
-    settings = SettingsAccessor.new(<<-YAML)
-    git_servers:
-      git.example.com:
-        type: github
-    YAML
+    settings = {"git_servers" => {"git.example.com" => {"type" => "github"}}}
     stub_const "Settings", settings
   end
 

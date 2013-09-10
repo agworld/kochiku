@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe PullRequestsController do
   before do
-    settings = SettingsAccessor.new(<<-YAML)
-    git_servers:
-      git.example.com:
-        type: github
-    YAML
+    settings = {"git_servers" => {"git.example.com" => {"type" => "github"}}}
     stub_const "Settings", settings
   end
 

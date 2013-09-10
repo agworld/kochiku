@@ -51,12 +51,7 @@ describe BuildPart do
 
     context "with a git mirror specified" do
       before do
-        settings = SettingsAccessor.new(<<-YAML)
-        git_servers:
-          git.example.com:
-            type: github
-            mirror: "git://git-mirror.example.com/"
-        YAML
+        settings = {"git_servers" => {"git.example.com" => {"type" => "github", "mirror" => "git://git-mirror.example.com/"}}}
         stub_const "Settings", settings
       end
 
@@ -69,11 +64,7 @@ describe BuildPart do
 
     context "with no git mirror specified" do
       before do
-        settings = SettingsAccessor.new(<<-YAML)
-        git_servers:
-          git.example.com:
-            type: github
-        YAML
+        settings = {"git_servers" => {"git.example.com" => {"type" => "github"}}}
         stub_const "Settings", settings
       end
 

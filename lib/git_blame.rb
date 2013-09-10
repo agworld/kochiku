@@ -42,7 +42,7 @@ class GitBlame
     private
 
     def email_from_git_email(email)
-      if email =~ /^#{confgatron.git_pair_email_prefix}\+/
+      if email =~ /^#{configatron.git_pair_email_prefix}\+/
         localpart, domain = email.split('@')
         usernames = localpart.strip.split('+')
         usernames[1..-1].map { |username| "#{username}@#{domain}"}

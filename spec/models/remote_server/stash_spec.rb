@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe RemoteServer do
   before do
-    settings = SettingsAccessor.new(<<-YAML)
-    git_servers:
-      stash.example.com:
-        type: stash
-        username: stashuser
-        password_file: /password
-    YAML
+    settings = {"git_servers" => {"stash.example.com" => {"type"=>"stash", "username"=>"stashuser", "password_file"=>"/password"}}}
     stub_const "Settings", settings
 
     allow(File).to receive(:read).with("/password").and_return("stashpassword")
