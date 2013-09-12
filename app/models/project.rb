@@ -75,11 +75,19 @@ class Project < ActiveRecord::Base
   end
 
   def build_time_history_sql(min_build_id)
+    min_max = case ActiveRecord::Base.connection.instance_values["config"][:adapter]
+              when "mysql"
+                "IFNULL(FLOOR(ROUND(MAX(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)), 0) AS max,
+                 IFNULL(FLOOR(ROUND(MAX(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)) - FLOOR(ROUND(MIN(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)), 0) AS min_diff,"
+              when "postgresql"
+                "COALESCE(FLOOR(ROUND(MAX(EXTRACT(epoch FROM build_attempts.finished_at) - EXTRACT(epoch FROM build_attempts.started_at)) / 60)), 0) AS max,
+                 COALESCE(FLOOR(ROUND(MAX(EXTRACT(epoch FROM build_attempts.finished_at) - EXTRACT(epoch FROM build_attempts.started_at)) / 60)) - FLOOR(ROUND(MIN(EXTRACT(epoch FROM build_attempts.finished_at) - EXTRACT(epoch FROM build_attempts.started_at)) / 60)), 0) AS min_diff,"
+              end
+
     return <<-SQL
       SELECT build_parts.kind AS kind,
              SUBSTR(builds.ref, 1, 5) AS ref,
-             IFNULL(FLOOR(ROUND(MAX(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)), 0) AS max,
-             IFNULL(FLOOR(ROUND(MAX(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)) - FLOOR(ROUND(MIN(UNIX_TIMESTAMP(build_attempts.finished_at) - UNIX_TIMESTAMP(build_attempts.started_at)) / 60)), 0) AS min_diff,
+             #{min_max}        
              0 AS max_diff,
              builds.id,
              builds.state,
